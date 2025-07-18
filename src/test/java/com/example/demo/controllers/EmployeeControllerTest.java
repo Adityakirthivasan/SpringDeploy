@@ -53,7 +53,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-//Aditya K 23EC002
+
 import java.util.*;
 
 import static org.mockito.Mockito.when;
@@ -121,10 +121,15 @@ public class EmployeeControllerTest {
     @Test
     void testPutMethod() {
         int empId = 2;
-        String expected = "Updated Successfully";
+        RegisterDetails updatedEmp = new RegisterDetails();
+        updatedEmp.setName("Updated Name");
+        updatedEmp.setEmail("updated@example.com");
+        updatedEmp.setUserName("updatedUser");
 
-        when(employeeService.updateEmployee(empId)).thenReturn(expected);
-        String result = employeeController.putMethod(empId);
+        String expected = "Employee Updated Successfully";
+
+        when(employeeService.updateEmployee(empId, updatedEmp)).thenReturn(expected);
+        String result = employeeController.putMethod(empId, updatedEmp);
 
         assertEquals(expected, result);
     }

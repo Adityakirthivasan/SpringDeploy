@@ -59,22 +59,24 @@ public class EmployeeService {
     }
 
     public RegisterDetails getEmployeeById(int empId) {
-        return registerDetailsRepository.findById(empId).orElse(new RegisterDetails());
+        return registerDetailsRepository.findById(empId)
+                .orElse(new RegisterDetails());
     }
-
-//    public List<RegisterDetails> getEmployeeByJob() {
-//        return registerDetailsRepository.findByRole();
-//    }
 
     public String addEmployee(RegisterDetails employee) {
         registerDetailsRepository.save(employee);
         return "Employee Added Successfully";
     }
 
-    public String updateEmployee(int empId) {
-        RegisterDetails user = registerDetailsRepository.findById(empId)
+    public String updateEmployee(int empId, RegisterDetails updatedEmployee) {
+        RegisterDetails existing = registerDetailsRepository.findById(empId)
                 .orElseThrow(() -> new RuntimeException("No Such User Present"));
-        registerDetailsRepository.save(user);
+
+        existing.setName(updatedEmployee.getName());
+        existing.setEmail(updatedEmployee.getEmail());
+        existing.setUserName(updatedEmployee.getUserName());
+
+        registerDetailsRepository.save(existing);
         return "Employee Updated Successfully";
     }
 

@@ -91,7 +91,6 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 public class UserDetailsDto {
-    private int empId;
     private String name;
     private String email;
     private String password;
